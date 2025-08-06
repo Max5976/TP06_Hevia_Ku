@@ -17,13 +17,14 @@ public class HomeController : Controller
     {
         return View();
     }
-        public IActionResult LogIn()
+    
+    public IActionResult LogIn()
     {
         return View();
     }
 
     [HttpPost]
-    public IActionResult LogIn(string email, string contrasenia)
+    public IActionResult LogIn(string nombre, string contrasenia)
     {
         Usuario integrante = BD.encontrarUsuario(email, contrasenia);
         if (integrante == null)

@@ -1,0 +1,38 @@
+@{
+    ViewData["Title"] = "Registro de nuevo integrante";
+}
+<div class="registroUsuario" style="max-width: 500px; margin: 40px auto; padding: 30px; border-radius: 12px; background: #f8f9fa; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+    <h2 style="text-align:center; color:#333;">¡Crea tu cuenta y sé parte del equipo!</h2>
+    @if (ViewBag.Error != null)
+    {
+        <div style="color: #b00020; background: #ffeaea; padding: 10px; border-radius: 6px; margin-bottom: 15px;">@ViewBag.Error</div>
+    }
+    <form action='@Url.Action("RegistrarUsuario", "Home")' method="post">
+        <label>Nombre de usuario:</label>
+        <input type="text" name="nombreDeUsuario" required style="width:100%;margin-bottom:10px;" />
+
+        <label>Correo electrónico:</label>
+        <input type="email" name="email" required style="width:100%;margin-bottom:10px;" />
+
+        <label>Contraseña:</label>
+        <input type="password" name="password" required style="width:100%;margin-bottom:10px;" />
+
+        <label>Fecha de nacimiento:</label>
+        <input type="date" name="fechaDeNacimiento" required style="width:100%;margin-bottom:10px;" />
+
+        <label>Palabras clave que te describan:</label>
+        <input type="text" name="palabrasClaveQueDescriban" style="width:100%;margin-bottom:10px;" />
+
+        <label>Logros:</label>
+        <input type="text" name="logros" style="width:100%;margin-bottom:10px;" />
+
+        <label>Opinión profesional:</label>
+        <input type="text" name="opinionProfesional" style="width:100%;margin-bottom:10px;" />
+
+        <label>URL de tu foto:</label>
+        <input type="text" name="foto" style="width:100%;margin-bottom:20px;" />
+
+        <button type="submit" style="width:100%;padding:10px;background:#007bff;color:white;border:none;border-radius:6px;font-size:1.1em;">Registrarme</button>
+    </form>
+    <p style="text-align:center;margin-top:15px;">¿Ya tienes cuenta? <a href='@Url.Action("LogIn", "Home")'>Inicia sesión aquí</a></p>
+</div>

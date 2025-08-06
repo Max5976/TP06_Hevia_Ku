@@ -14,13 +14,13 @@ public static class BD {
             connection.Execute(query, nuevo);
         }
     }
-    public static Usuario encontrarUsuario(string email, string contrasenia)
+    public static Usuario encontrarUsuario(string nombreUsuario, string password)
     {
         Usuario integrante;
         using(SqlConnection connection = new SqlConnection(_connectionString)) 
         {
-            string query = "SELECT email, password FROM Integrantes WHERE email = @Email AND password = @Contrasenia";
-            integrante = connection.QueryFirstOrDefault<Usuario>(query, new { Email = email, Password = contrasenia });
+            string query = "SELECT * FROM Usuarios WHERE Usuario = @Usuario AND Password = @Password";
+            integrante = connection.QueryFirstOrDefault<Usuario>(query, new { Usuario = nombreUsuario, Password = password });
         }
         return integrante;
     }
@@ -32,13 +32,21 @@ public static class BD {
             return connection.QueryFirstOrDefault<Usuario>(query, new { Email = email });
        }
     }
+    public static Usuario encontrarUsuarioPorNombreDeUsuario(string Nombre)
+    {
+        using (SqlConnection connection = new SqlConnection(_connectionString))
+        {
+            string query = "SELECT * FROM Integrantes WHERE  = @Email";
+            return connection.QueryFirstOrDefault<Usuario>(query, new { Email = email });
+       }
+    }
 
     public static Usuario encontrarTareaPorNombre(string nombre)
     {
         using (SqlConnection connection = new SqlConnection(_connectionString))
         {
-            string query = "SELECT * FROM Integrantes WHERE email = @Email";
-            return connection.QueryFirstOrDefault<Usuario>(query, new { Email = email });
+            string query = "SELECT * FROM Tareas WHERE nombre = @Nombre";
+            return connection.QueryFirstOrDefault<Usuario>(query, new { Nombre = nombre });
        }
     }
 }
