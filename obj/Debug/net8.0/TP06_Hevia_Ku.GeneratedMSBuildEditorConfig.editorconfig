@@ -9,31 +9,43 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = TP06_Hevia_Ku
 build_property.RootNamespace = TP06_Hevia_Ku
-build_property.ProjectDir = z:\2025\programacion\TP06_Hevia_Ku\
+build_property.ProjectDir = Z:\2025\programacion\TP06_Hevia_Ku\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = z:\2025\programacion\TP06_Hevia_Ku
+build_property.MSBuildProjectDirectory = Z:\2025\programacion\TP06_Hevia_Ku
 build_property._RazorSourceGeneratorDebug = 
 
-[z:/2025/programacion/TP06_Hevia_Ku/Views/Home/Index.cshtml]
+[Z:/2025/programacion/TP06_Hevia_Ku/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[z:/2025/programacion/TP06_Hevia_Ku/Views/Shared/_Layout.cshtml]
+[Z:/2025/programacion/TP06_Hevia_Ku/Views/Home/LogIn.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxMb2dJbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[Z:/2025/programacion/TP06_Hevia_Ku/Views/Home/Perfil.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQZXJmaWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[Z:/2025/programacion/TP06_Hevia_Ku/Views/Home/SignUp.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxTaWduVXAuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[Z:/2025/programacion/TP06_Hevia_Ku/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[z:/2025/programacion/TP06_Hevia_Ku/Views/Shared/_ValidationScriptsPartial.cshtml]
+[Z:/2025/programacion/TP06_Hevia_Ku/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[z:/2025/programacion/TP06_Hevia_Ku/Views/_ViewImports.cshtml]
+[Z:/2025/programacion/TP06_Hevia_Ku/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[z:/2025/programacion/TP06_Hevia_Ku/Views/_ViewStart.cshtml]
+[Z:/2025/programacion/TP06_Hevia_Ku/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

@@ -24,18 +24,19 @@ public class HomeController : Controller
     }
 
     [HttpPost]
-    public IActionResult LogIn(string nombre, string contrasenia)
+    public IActionResult ProcesoDeLogueo(string NombreUsuario, string Password)
     {
-        Usuario integrante = BD.encontrarUsuario(email, contrasenia);
+        Usuario integrante = BD.encontrarUsuario(NombreUsuario, Password);
         if (integrante == null)
         {
             ViewBag.Error = "Usuario o contraseña incorrectos";
-            return View();
+            return View("LogIn");
         }
         else
         {
-            HttpContext.Session.SetString("usuarioEmail", integrante.email);
-            return RedirectToAction("Perfil");
+            HttpContext.Session.SetString("usuarioNombre", integrante.NombreUsuario);
+            ViewBag.Tareas = Objetos.StringToList<Usuario>(HttpContext.Session.GetString("tareas"));
+            return View("Perfil");
         }
     }
 
@@ -47,32 +48,26 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult RegistrarUsuario(Usuario nuevo)
     {
-        if (BD.encontrarUsuarioPorEmail(nuevo.email) != null)
+        if (BD.encontrarUsuarioPorEmail(nuevo.Email) != null)
         {
             ViewBag.Error = "Ya existe una cuenta con ese correo electrónico. Por favor, intenta con otro.";
             return View("SignUp");
         }
-        BD.AgregarUsuario(nuevo);
-        HttpContext.Session.SetString("usuarioEmail", nuevo.email);
-        return RedirectToAction("Perfil");
-    }
-
-    public IActionResult Perfil()
-    {
-        string email = HttpContext.Session.GetString("usuarioEmail");
-        if (string.IsNullOrEmpty(email))
+        if (BD.encontrarUsuarioPorNombreDeUsuario(nuevo.NombreUsuario) != null)
         {
-            return RedirectToAction("LogIn");
+            ViewBag.Error = "Ya existe una cuenta con ese nombre de usuario. Por favor, intenta con otro.";
+            return View("SignUp");
         }
-        Usuario integrante = BD.encontrarUsuarioPorEmail(email);
-        ViewBag.Usuario = integrante;
-        return View();
+        BD.agregarUsuario(nuevo);
+        HttpContext.Session.SetString("usuarioNombre", nuevo.NombreUsuario);
+        ViewBag.Tareas = Objetos.StringToList<Usuario>(HttpContext.Session.GetString("tareas"));
+        return View("Perfil");
     }
 
     public IActionResult CerrarSesion()
     {
         HttpContext.Session.Clear();
-        return RedirectToAction("LogIn");
+        return RedirectToAction("Index");
     }
     
 }

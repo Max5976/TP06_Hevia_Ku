@@ -1,0 +1,25 @@
+@{
+    ViewData["Title"] = "Perfil";
+}
+<div class="datosPersonales">
+    <h1>Usuario: @HttpContext.Session.GetString("usuarioNombre")</h1>
+</div>
+<div class="tareas">
+    <h1>Tareas:</h1>
+    @if (tareas != null)
+    {
+        foreach (var tarea in tareas)
+        {
+            <h2>@tarea.Nombre</h2>
+        }
+    }
+    else
+    {
+        <h2>No hay tareas que haya hecho @HttpContext.Session.GetString("usuarioNombre")</h2>
+    }
+</div>
+<div class="cerrarSesion">
+    <button class="btn" type="button" onclick="location.href='@Url.Action("CerrarSesion")'">
+        Cerrar Sesión
+    </button>
+</div>

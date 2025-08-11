@@ -2,20 +2,20 @@
     ViewData["Title"] = "Inicio";
 }
 
-<div style="margin-top:2%;">
-    <h2 style="font-size:2em; color:#007bff; margin-bottom:1%;">¡Bienvenidos!</h2>
-    <p style="font-size:1.15em; color:#222; line-height:1.6;">
+<div>
+    <h2>¡Bienvenidos!</h2>
+    <p>
         ¡Hola! Si entraste a este sitio, estás en un buen camino. <b>¡Somos Planetas!</b><br>
         En el año 2067, luego de años de humillación y derrota, el pueblo argentino se vio debilitado mundialmente y todos los países del mundo le declararon la guerra.<br>
         Nosotros salvamos al país.<br>
-        <span style="color:#555;">¿Te animás a ser parte de la historia?</span>
+        <span>¿Te animás a ser parte de la historia?</span>
     </p>
 </div>
 <div class="opciones" style="margin:2% 0 3% 0; text-align:center;">
-    <button class="btn" type="button" onclick="location.href='@Url.Action("LogIn", "Home")'">
+    <button class="btn" type="button" onclick="location.href='@Url.Action("LogIn")'">
         Iniciar Sesión
     </button>
-    <button class="btn" type="button" onclick="location.href='@Url.Action("SignUp", "Home")'">
+    <button class="btn" type="button" onclick="location.href='@Url.Action("SignUp")'">
         Registrate
     </button>
 </div>
