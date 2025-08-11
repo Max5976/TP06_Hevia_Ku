@@ -2,20 +2,19 @@
     ViewData["Title"] = "Perfil";
 }
 <div class="datosPersonales">
-    <h1>Usuario: @HttpContext.Session.GetString("usuarioNombre")</h1>
+    <h1>Usuario: @Context.Session.GetString("usuarioNombre")</h1>
+
 </div>
 <div class="tareas">
     <h1>Tareas:</h1>
-    @if (tareas != null)
-    {
-        foreach (var tarea in tareas)
+        @foreach (var tarea in ViewBag.tareas)
         {
-            <h2>@tarea.Nombre</h2>
+            <h2>@ViewBag.Nombretarea</h2>
         }
-    }
     else
     {
-        <h2>No hay tareas que haya hecho @HttpContext.Session.GetString("usuarioNombre")</h2>
+        <h2>No hay tareas que haya hecho @Context.Session.GetString("usuarioNombre")</h2>
+
     }
 </div>
 <div class="cerrarSesion">

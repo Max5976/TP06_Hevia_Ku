@@ -35,7 +35,7 @@ public class HomeController : Controller
         else
         {
             HttpContext.Session.SetString("usuarioNombre", integrante.NombreUsuario);
-            ViewBag.Tareas = Objetos.StringToList<Usuario>(HttpContext.Session.GetString("tareas"));
+            ViewBag.Tareas = Objeto.StringToObject<Usuario>(HttpContext.Session.GetString("tareas"));
             return View("Perfil");
         }
     }
@@ -60,7 +60,7 @@ public class HomeController : Controller
         }
         BD.agregarUsuario(nuevo);
         HttpContext.Session.SetString("usuarioNombre", nuevo.NombreUsuario);
-        ViewBag.Tareas = Objetos.StringToList<Usuario>(HttpContext.Session.GetString("tareas"));
+        ViewBag.Tareas = Objeto.StringToObject<Usuario>(HttpContext.Session.GetString("tareas"));
         return View("Perfil");
     }
 
@@ -69,6 +69,5 @@ public class HomeController : Controller
         HttpContext.Session.Clear();
         return RedirectToAction("Index");
     }
-    
 }
 

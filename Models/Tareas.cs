@@ -1,10 +1,10 @@
 namespace TP06_Hevia_Ku.Models;
 
 public class Tareas {
-    public int id { get; private set; }
-    public string nombre { get; set; }
-    public bool estado { get; set; }
-    public bool eliminado { get; set; }
+    public int Id { get; private set; }
+    public string Nombre { get; set; }
+    public bool Estado { get; set; }
+    public bool Eliminado { get; set; }
 
     public Tareas() {
     }

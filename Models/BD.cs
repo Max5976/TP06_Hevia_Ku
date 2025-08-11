@@ -7,8 +7,12 @@ public static class BD {
     {
         using (SqlConnection connection = new SqlConnection(_connectionString))
         {
-            string query = "INSERT INTO Usuarios (NombreUsuario, Email, Password) VALUES (@NombreUsuario, @Email, @Password)";
-            connection.Execute(query, nuevo);
+            string query = "exec InsertarUsuario @nombreUsuario, @email, @password";
+            int IdUsuario = connection.Execute(query, new {
+                nombreUsuario = nuevo.NombreUsuario,    
+                email = nuevo.Email,
+                password = nuevo.Password
+            });
         }
     }
     public static Usuario encontrarUsuario(string NombreUsuario, string Password)
@@ -66,13 +70,24 @@ public static List<Usuarios_Tareas> MostrarTareas()
     return tareas;
 }
 
-    public static void agregarTarea(Tareas nuevo)
+public static void agregarTarea(Tareas nuevo)
+{
+    using (SqlConnection connection = new SqlConnection(_connectionString))
     {
-        using (SqlConnection connection = new SqlConnection(_connectionString))
-        {
-            string query = "INSERT INTO Tareas (Nombre) VALUES (@Nombre)";
-            connection.Execute(query, nuevo);
-        }
+        string query = "exec InsertarTarea @nombre, @estado, @eliminado";
+        int IdTarea = connection.Execute(query, new {
+            nombre = nuevo.Nombre,    
+            estado = nuevo.Estado,
+            eliminado = nuevo.Eliminado
+        });
+
+        string query = "exec InsertarConeccionUsuarioTarea @usuarioID, @tareaID, @creador";
+        connection.Execute(query, new {
+            nombre = nuevo.Nombre,    
+            estado = nuevo.Estado,
+            eliminado = nuevo.Eliminado
+        });
+    }
 }
 public static void EliminarTarea(int idTarea)
 {
