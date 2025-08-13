@@ -18,7 +18,7 @@ public static class BD {
     public static Usuario encontrarUsuario(string NombreUsuario, string Password)
     {
         Usuario integrante;
-        using(SqlConnection connection = new SqlConnection(_connectionString)) 
+        using (SqlConnection connection = new SqlConnection(_connectionString)) 
         {
             string query = "SELECT * FROM Usuarios WHERE NombreUsuario = @NombreUsuario AND Password = @Password";
             integrante = connection.QueryFirstOrDefault<Usuario>(query, new { NombreUsuario = NombreUsuario, Password = Password });
@@ -81,8 +81,8 @@ public static void agregarTarea(Tareas nuevo)
             eliminado = nuevo.Eliminado
         });
 
-        string query = "exec InsertarConeccionUsuarioTarea @usuarioID, @tareaID, @creador";
-        connection.Execute(query, new {
+        string query2 = "exec InsertarConeccionUsuarioTarea @usuarioID, @tareaID, @creador";
+        connection.Execute(query2, new {
             nombre = nuevo.Nombre,    
             estado = nuevo.Estado,
             eliminado = nuevo.Eliminado

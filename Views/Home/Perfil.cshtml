@@ -5,18 +5,20 @@
     <h1>Usuario: @Context.Session.GetString("usuarioNombre")</h1>
 
 </div>
-<div class="tareas">
-    <h1>Tareas:</h1>
-        @foreach (var tarea in ViewBag.tareas)
+@if (ViewBag.tareas == null) {
+} else {
+    <div class="tareas">
+        <h1>Tareas:</h1>
+            @foreach (var tarea in ViewBag.tareas)
+            {
+                <h2>@ViewBag.Nombretarea</h2>
+            }
+        else
         {
-            <h2>@ViewBag.Nombretarea</h2>
+            <h2>No hay tareas que haya hecho @Context.Session.GetString("usuarioNombre")</h2>
         }
-    else
-    {
-        <h2>No hay tareas que haya hecho @Context.Session.GetString("usuarioNombre")</h2>
-
-    }
-</div>
+    </div>
+}
 <div class="cerrarSesion">
     <button class="btn" type="button" onclick="location.href='@Url.Action("CerrarSesion")'">
         Cerrar Sesión

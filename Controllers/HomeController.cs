@@ -60,7 +60,11 @@ public class HomeController : Controller
         }
         BD.agregarUsuario(nuevo);
         HttpContext.Session.SetString("usuarioNombre", nuevo.NombreUsuario);
-        ViewBag.Tareas = Objeto.StringToObject<Usuario>(HttpContext.Session.GetString("tareas"));
+        if (Objeto.StringToObject<Usuario>(HttpContext.Session.GetString("tareas")) == null) {
+        }
+        else {
+            ViewBag.Tareas = Objeto.StringToObject<Usuario>(HttpContext.Session.GetString("tareas"));
+        }
         return View("Perfil");
     }
 
