@@ -1,0 +1,9 @@
+@{
+    ViewData["Title"] = "Editar Tarea";
+}
+<h1>Cambiar nombre</h1>
+<form method="post" asp-action="EditarTarea2">
+    <input type="hidden" name="tareaId" value="@ViewBag.Tarea.Id" />
+    <input type="text" name="Nombre" value="@ViewBag.Tarea.Nombre" required />
+    <button type="submit">Guardar</button>
+</form>

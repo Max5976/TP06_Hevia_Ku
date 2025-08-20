@@ -1,0 +1,23 @@
+@{
+    
+}
+
+@if (ViewBag.EsCreador)
+{
+    <h2>Compartir tarea</h2>
+    <form method="post" action="/Home/CompartirTarea">
+        <input type="hidden" name="TareaId" value="@ViewBag.TareaId" />
+        <label>Selecciona usuarios para compartir:</label>
+        <select name="UsuarioNombres" multiple>
+            @foreach (var usuario in ViewBag.Usuarios)
+            {
+                <option value="@usuario.NombreUsuario">@usuario.Nombre</option>
+            }
+        </select>
+        <button type="submit">Compartir</button>
+    </form>
+}
+else
+{
+    <p>No tienes permisos para compartir esta tarea.</p>
+}

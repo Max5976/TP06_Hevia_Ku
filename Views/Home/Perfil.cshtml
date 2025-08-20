@@ -3,19 +3,29 @@
 }
 <div class="datosPersonales">
     <h1>Usuario: @Context.Session.GetString("usuarioNombre")</h1>
-
 </div>
-@if (ViewBag.tareas == null) {
-} else {
+
+@if (ViewBag.TareasYUsuario == null || !((IEnumerable<Usuarios_Tareas>)ViewBag.TareasYUsuario).Any()) {
+    <p>No hay tareas disponibles</p>
+} 
+else {
     <div class="tareas">
         <h1>Tareas:</h1>
-            @foreach (var tarea in ViewBag.tareas)
-            {
-                <h2>@ViewBag.Nombretarea</h2>
-            }
-        else
+        @foreach (var Tarea in BD.encontrarTareasDeUsuario(ViewBag.TareasYUsuario))
         {
-            <h2>No hay tareas que haya hecho @Context.Session.GetString("usuarioNombre")</h2>
+            <div class="tarea">
+                <h2>@Tarea.Nombre</h2>
+                <p>Estado: @Tarea.Estado</p>
+                @if (Tarea.Creador == 1){
+                    <p>Propiedad: Si</p>
+                    <button onclick="location.href='@Url.Action("Editar", "Tareas", new { id = Tarea.Id })'">Cambiar Nombre</button>
+                    <button onclick="location.href='@Url.Action("EliminarTarea", "Tareas", new { id = Tarea.Id })'">Eliminar</button>
+                }
+                else {
+                    <p>Propiedad: No</p>
+                }
+                <button onclick="location.href='@Url.Action("MarcarTareaFinalizada", "Tareas", new { id = Tarea.Id })'">Finalizar</button>
+            </div>
         }
     </div>
 }
