@@ -17,6 +17,6 @@ public class PerfilController : Controller
             : Objeto.StringToObject<List<Usuarios_Tareas>>(tareasString);
 
         ViewBag.Tareas = tareas;
-        return View();
+        return View("~/Views/Home/Perfil.cshtml");
     }
 }

@@ -5,7 +5,7 @@
 @if (ViewBag.EsCreador)
 {
     <h2>Compartir tarea</h2>
-    <form method="post" action="/Home/CompartirTarea">
+    <form method="post" action='@Url.Action("CompartirTarea", "Tareas")'>
         <input type="hidden" name="TareaId" value="@ViewBag.TareaId" />
         <label>Selecciona usuarios para compartir:</label>
         <select name="UsuarioNombres" multiple>

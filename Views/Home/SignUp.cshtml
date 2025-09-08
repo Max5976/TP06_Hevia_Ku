@@ -7,7 +7,7 @@
     {
         <div style="color: #b00020; background: #ffeaea; padding: 10px; border-radius: 6px; margin-bottom: 15px;">@ViewBag.Error</div>
     }
-    <form action='@Url.Action("RegistrarUsuario", "Home")' method="post">
+    <form action='@Url.Action("RegistrarUsuario", "Auth")' method="post">
         <label>Nombre de usuario:</label>
         <input type="text" name="NombreUsuario" required style="width:100%;margin-bottom:10px;" />
 
@@ -19,5 +19,5 @@
 
         <button type="submit" style="width:100%;padding:10px;background:#007bff;color:white;border:none;border-radius:6px;font-size:1.1em;">Registrarme</button>
     </form>
-    <p style="text-align:center;margin-top:15px;">¿Ya tienes cuenta? <a href='@Url.Action("LogIn", "Home")'>Inicia sesión aquí</a></p>
+    <p style="text-align:center;margin-top:15px;">¿Ya tienes cuenta? <a href='@Url.Action("LogIn", "Auth")'>Inicia sesión aquí</a></p>
 </div>

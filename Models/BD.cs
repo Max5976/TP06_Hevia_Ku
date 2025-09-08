@@ -63,25 +63,35 @@ public static class BD
         }
     }
 
-    public static void agregarTarea(Tareas nuevo)
+    public static void agregarTarea(Tareas nuevo, string usuarioNombre)
     {
         using (SqlConnection connection = new SqlConnection(_connectionString))
         {
             string query = "exec InsertarTarea @nombre, @estado, @eliminado";
-            int IdTarea = connection.Execute(query, new
+            connection.Execute(query, new
             {
                 nombre = nuevo.Nombre,
                 estado = nuevo.Estado,
                 eliminado = nuevo.Eliminado
             });
+            string selectId = "SELECT TOP 1 Id FROM Tareas WHERE Nombre = @nombre ORDER BY Id DESC";
+            int IdTarea = connection.QueryFirstOrDefault<int>(selectId, new { nombre = nuevo.Nombre });
+            if (IdTarea == 0)
+            {
+                IdTarea = connection.QueryFirstOrDefault<int>("SELECT ISNULL(MAX(Id),0) FROM Tareas");
+            }
 
-            string query2 = "exec InsertarConeccionUsuarioTarea @usuarioID, @tareaID, @creador";
-            connection.Execute(query2, new
+            var usuario = encontrarUsuarioPorNombreDeUsuario(usuarioNombre);
+            if (usuario != null)
             {
-                nombre = nuevo.Nombre,
-                estado = nuevo.Estado,
-                eliminado = nuevo.Eliminado
-            });
+                string query2 = "exec InsertarConeccionUsuarioTarea @usuarioID, @tareaID, @creador";
+                connection.Execute(query2, new
+                {
+                    usuarioID = usuario.Id,
+                    tareaID = IdTarea,
+                    creador = 1
+                });
+            }
         }
     }
     public static void EliminarTarea(int idTarea)
@@ -119,8 +129,30 @@ public static class BD
                              FROM Usuarios_Tareas ut 
                              INNER JOIN Usuarios u ON ut.UsuarioId = u.Id 
                              WHERE ut.TareaId = @tareaId AND u.NombreUsuario = @usuarioNombre";
-            var creador = connection.QueryFirstOrDefault<string>(query, new { usuarioNombre, tareaId });
-            return creador == usuarioNombre;
+            var creadorFlag = connection.QueryFirstOrDefault<int>(query, new { usuarioNombre, tareaId });
+            return creadorFlag == 1;
+        }
+    }
+
+    public static bool EsUsuarioDeTarea(string usuarioNombre, int tareaId)
+    {
+        using (SqlConnection connection = new SqlConnection(_connectionString))
+        {
+            string query = @"SELECT COUNT(1)
+                             FROM Usuarios_Tareas ut 
+                             INNER JOIN Usuarios u ON ut.UsuarioId = u.Id 
+                             WHERE ut.TareaId = @tareaId AND u.NombreUsuario = @usuarioNombre";
+            int count = connection.QueryFirstOrDefault<int>(query, new { usuarioNombre, tareaId });
+            return count > 0;
+        }
+    }
+
+    public static List<Usuario> ObtenerTodosLosUsuarios()
+    {
+        using (SqlConnection connection = new SqlConnection(_connectionString))
+        {
+            string query = "SELECT Id, NombreUsuario, Email, Password FROM Usuarios";
+            return connection.Query<Usuario>(query).ToList();
         }
     }
 

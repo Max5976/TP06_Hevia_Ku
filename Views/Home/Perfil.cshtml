@@ -5,32 +5,48 @@
     <h1>Usuario: @Context.Session.GetString("usuarioNombre")</h1>
 </div>
 
-@if (ViewBag.TareasYUsuario == null || !((IEnumerable<Usuarios_Tareas>)ViewBag.TareasYUsuario).Any()) {
+<div class="crearTarea">
+    <h2>Crear nueva tarea</h2>
+    <form method="post" action='@Url.Action("CrearTarea", "Tareas")'>
+        <input type="text" name="Nombre" placeholder="Nombre de la tarea" required />
+        <button type="submit">Crear</button>
+    </form>
+</div>
+
+@{
+    var usuarioNombre = Context.Session.GetString("usuarioNombre");
+    var conexiones = string.IsNullOrEmpty(usuarioNombre)
+        ? new List<Usuarios_Tareas>()
+        : BD.encontrarUsuarioYTareasDeUsuario(usuarioNombre);
+}
+@if (conexiones == null || !conexiones.Any()) {
     <p>No hay tareas disponibles</p>
-} 
-else {
+} else {
     <div class="tareas">
         <h1>Tareas:</h1>
-        @foreach (var Tarea in BD.encontrarTareasDeUsuario(ViewBag.TareasYUsuario))
+        @foreach (var conexion in conexiones)
         {
-            <div class="tarea">
-                <h2>@Tarea.Nombre</h2>
-                <p>Estado: @Tarea.Estado</p>
-                @if (Tarea.Creador == 1){
-                    <p>Propiedad: Si</p>
-                    <button onclick="location.href='@Url.Action("Editar", "Tareas", new { id = Tarea.Id })'">Cambiar Nombre</button>
-                    <button onclick="location.href='@Url.Action("EliminarTarea", "Tareas", new { id = Tarea.Id })'">Eliminar</button>
-                }
-                else {
-                    <p>Propiedad: No</p>
-                }
-                <button onclick="location.href='@Url.Action("MarcarTareaFinalizada", "Tareas", new { id = Tarea.Id })'">Finalizar</button>
-            </div>
+            var tareas = BD.encontrarTareasDeUsuario(conexion);
+            foreach (var Tarea in tareas)
+            {
+                <div class="tarea">
+                    <h2>@Tarea.Nombre</h2>
+                    <p>Estado: @(Tarea.Estado ? "Finalizada" : "Activa")</p>
+                    <button onclick="location.href='@Url.Action("EditarTarea", "Tareas", new { tareaId = Tarea.Id })'">Editar</button>
+                    @if (conexion.Creador == "1"){
+                        <button onclick="location.href='@Url.Action("EliminarTarea", "Tareas", new { id = Tarea.Id })'">Eliminar</button>
+                        <button onclick="location.href='@Url.Action("Compartir", "Tareas", new { id = Tarea.Id })'">Compartir</button>
+                    }
+                    @if (!Tarea.Estado) {
+                        <button onclick="location.href='@Url.Action("MarcarTareaFinalizada", "Tareas", new { id = Tarea.Id })'">Finalizar</button>
+                    }
+                </div>
+            }
         }
     </div>
 }
 <div class="cerrarSesion">
-    <button class="btn" type="button" onclick="location.href='@Url.Action("CerrarSesion")'">
+    <button class="btn" type="button" onclick="location.href='@Url.Action("CerrarSesion", "Home")'">
         Cerrar Sesión
     </button>
 </div>
